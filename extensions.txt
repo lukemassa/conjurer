@@ -1,0 +1,4 @@
+book thingYouCanPickUp
+theConjurer person
+solid_food thingYouCanEat
+nutrient thingYouCanEat

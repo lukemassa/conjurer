@@ -1,0 +1,17 @@
+# This file contains a list of allowable actions.
+# The format for each entry is as follows
+# The first line is the name of the verb followed by the theta roles
+# The next chunk of lines (indented by one tab) are relations that
+#       must hold for the action to be done.
+# The final chunk (indented by two tabs) are relations that will
+#	occur after the action is done.
+# Note that throughout that 0 refers to the Conjurer (with the theta
+#	role "person").
+
+place thingYouCanPickUp object
+	A:onTopOf 1 2
+eat thingYouCanEat
+	A:full 0
+	A:delete 1
+pour liquid container
+	A:insideOf 1 2
