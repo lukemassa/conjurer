@@ -1,7 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.PriorityQueue;
 
-public class World
+public class World implements Serializable
 {
 	private ArrayList<Thing> allThings;
 	private PriorityQueue<Relation> allRelations;
@@ -26,34 +28,47 @@ public class World
 	
 	public String toString()
 	{
-		StringBuilder sb = new StringBuilder();
-		sb.append("\nRelations in the world:");
-		String lastName = "";
+		HashMap<String,ArrayList<Thing[]>> relationTree = new HashMap<String,ArrayList<Thing[]>>();
+		
 		for (Relation r : allRelations)
 		{
-			if (r.getName() != lastName)
+			ArrayList<Thing[]> things= relationTree.get(r.getName());
+			if (things == null)
 			{
-				sb.append("\n" + r.getName() + ": ");
-				lastName = r.getName();
+				things = new ArrayList<Thing[]>();
 			}
-			sb.append(r + " ");
+			things.add(r.getThings());
+			relationTree.put(r.getName(), things);
 		}
-		sb.append("\n");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("\nRelations in the world:\n");
+
+		for (String name : relationTree.keySet())
+		{
+			sb.append("  " + name +": ");
+			for (Thing[] things : relationTree.get(name))
+			{
+				sb.append("(");
+				for (Thing t : things)
+					sb.append(t + ", ");
+				
+				sb.delete(sb.length()-2, sb.length());
+				sb.append(") ");
+			}
+			sb.append("\n");
+		}
+		
 		return sb.toString();
 	}
-	public static ArrayList<Relation> relationsOfAThing(Thing t)
-	{
-		ArrayList<Relation> toreturn = new ArrayList<Relation>();
-		for (Relation r : allRelations)
-		{
-			if (r.contains(t))
-				toreturn.add(r);
-		}
-			
-		return toreturn;
-	}
+
 	public void apply(String command)
 	{
+
+		if (command.equals(""))
+		{
+			return;
+		}
 		String verb = parseVerb(command);
 		String[] nouns = parseNouns(command);
 		
@@ -72,15 +87,13 @@ public class World
 				return;
 			}
 			if (verb.equals("exit"))
-			{
 				System.exit(1);
-			}
+			
 
 			a = new Action(theConjurer, verb, findThings(nouns));
 			
-			a.perform(allThings, allRelations);
-		
-			
+			alter(a.perform(this));
+
 		}
 		catch (BadSentence e)
 		{
@@ -91,9 +104,15 @@ public class World
 
 
 
+	private void alter(World newWorld)
+	{
+		this.allThings = newWorld.allThings;
+		this.allRelations = newWorld.allRelations;
+		
+	}
+
 	private void remove(Relation r)
 	{
-		
 		if (allRelations.contains(r))
 		{
 			allRelations.remove(r);
@@ -144,6 +163,51 @@ public class World
 
 	}
 
+	public void destroyThing(Thing thing)
+	{
+		ArrayList<Relation> deleteThese = relationsOfAThing(thing);
+		for (int i = 0; i < deleteThese.size(); i++	)
+			remove(deleteThese.get(i));
+		remove(thing);
+		
+		
 
+		
+	}
+	private void remove(Thing thing)
+	{
+		for (int i = 0; i < allThings.size(); i++)
+		{
+			if (thing.equals(allThings.get(i)))
+			{
+				allThings.remove(i);
+				return;
+			}
+		}
+		
+	}
+
+	private ArrayList<Relation> relationsOfAThing(Thing t)
+	{
+		ArrayList<Relation> toreturn = new ArrayList<Relation>();
+		for (Relation r : allRelations)
+		{
+			if (r.contains(t))
+				toreturn.add(r);
+		}
+		return toreturn;
+	}
+
+	public void deleteRelation(Relation r)
+	{
+		remove(r);
+		
+	}
+
+	public void addRelation(Relation r)
+	{
+		allRelations.add(r);
+		
+	}
 
 }

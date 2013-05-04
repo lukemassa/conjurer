@@ -12,6 +12,6 @@ place thingYouCanPickUp object
 	A:onTopOf 1 2
 eat thingYouCanEat
 	A:full 0
-	A:delete 1
+	A:destroy 1
 pour liquid container
 	A:insideOf 1 2

@@ -1,2 +1,2 @@
 #!/bin/bash
-java -cp bin Conjurer actions.txt things.txt
+java -cp bin/:jaws-bin.jar Conjurer 

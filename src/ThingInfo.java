@@ -11,6 +11,8 @@ import edu.smu.tspell.wordnet.NounSynset;
 import edu.smu.tspell.wordnet.Synset;
 import edu.smu.tspell.wordnet.SynsetType;
 import edu.smu.tspell.wordnet.WordNetDatabase;
+import edu.smu.tspell.wordnet.impl.file.SynsetFactory;
+import edu.smu.tspell.wordnet.impl.file.SynsetPointer;
 
 public class ThingInfo
 {
@@ -26,11 +28,16 @@ public class ThingInfo
 
 		if (nouns.length == 0)
 			throw new DontKnowThatNoun(name);
-		
+	
 		//fix this later. There should be a way to choose which synset is best for this noun.
 		return (NounSynset) nouns[0];
 	}
-
+	public static NounSynset getNounSynset(SynsetPointer pointer)
+	{
+		SynsetFactory sf = SynsetFactory.getInstance();
+		return (NounSynset) sf.getSynset(pointer);
+		
+	}
 	public static boolean isA(ExtendedNounSynset noun1, ExtendedNounSynset noun2)
 	{
 		//is sense one contained within sense2? 
@@ -44,8 +51,6 @@ public class ThingInfo
 		while (!queue.isEmpty())
 		{
 			ExtendedNounSynset n = queue.remove(0);
-			//System.out.println(n.getNounSynset());
-			//System.out.println(n.getNounSynset().hashCode());
 			if (n.equals(noun2))
 				return true;
 			queue.addAll(n.getParents());
@@ -82,8 +87,8 @@ public class ThingInfo
 					ArrayList<ExtendedNounSynset> temp = new ArrayList<ExtendedNounSynset>();
 					newParents.put(child.toString(), temp);
 				}
-				System.out.println("child" + child);
-				System.out.println("parent" + parent);
+				//System.out.println("child" + child);
+				//System.out.println("parent" + parent);
 				newParents.get(child.toString()).add(parent);
 				
 				sCurrentLine = br.readLine();

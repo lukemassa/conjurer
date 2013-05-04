@@ -39,7 +39,7 @@ public class Action
 			throw new VerbDoesntTakeTheseThings(whatItIs, whatItShouldBe);
 		
 	}
-	public void perform(ArrayList<Thing> allThings, PriorityQueue<Relation> allRelations)
+	public World perform(World w)
 	{
 		
 		HashMap<String,ArrayList<Integer>> results = ActionInfo.getResults(verb);
@@ -53,41 +53,27 @@ public class Action
 			
 			Relation r = new Relation(relationName, whichThings.toArray(aWhichThings));
 			
+			//get destroy command
 			if (r.getName().equals("destroy"))
 			{
-				Thing t = r.getThing(0);
-				ArrayList<Relation> deleteThese = World.relationsOfAThing(t);
-				for (int i = 0; i < deleteThese.size(); i++	)
-					remove(deleteThese.get(i), allThings);
-				remove(t, allThings);
+				w.destroyThing(r.getThing(0));
+
 			}
+			//remove given relation
 			else if (r.getName().charAt(0) == '~')
 			{
-				
+				w.deleteRelation(r);
 			}
-			allRelations.add(r);
+			//add relation
+			else 
+				w.addRelation(r);
 		}
 		
-		//delete all things
 	
-		
-		//add relation
-		allRelations.add(r);
-		
-		return toReturn;
+		return w;
 	}
-	private void remove(Thing t, ArrayList<Thing> allThings)
-	{
-		for (int i = 0; i < allThings.size(); i++)
-		{
-			if (t.equals(allThings.get(i)))
-			{
-				allThings.remove(i);
-				return;
-			}
-		}
-		
-	}
+
+
 	public static void main(String[] args)
 	{
 		// TODO Auto-generated method stub

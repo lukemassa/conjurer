@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Relation implements Comparable
+public class Relation implements Comparable, Serializable
 {
 	private String name;
 	private Thing things[];
@@ -9,6 +10,10 @@ public class Relation implements Comparable
 	{
 		this.name = name;
 		this.things = things;
+	}
+	public Thing[] getThings()
+	{
+		return things;
 	}
 	public String toString()
 	{
