@@ -1,0 +1,5 @@
+put
+conjurer put physical_object PREP location.
+beneficiary degree duration frequency manner purpose
+END
+

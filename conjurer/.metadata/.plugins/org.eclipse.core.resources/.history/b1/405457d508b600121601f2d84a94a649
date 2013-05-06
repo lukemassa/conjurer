@@ -1,0 +1,30 @@
+// the Template object
+import java.util.*;
+
+public class Template {
+	private String[] corePhrase;
+	private LinkedList<Integer> optionSlots;
+	private LinkedList<String> options;
+	
+	public Template(String filename)
+	{
+		corePhrase = null;
+		optionSlots = new LinkedList<Integer>();
+		options = new LinkedList<String>();
+	}
+	
+	public String[] print()
+	{
+		return corePhrase;
+	}
+	
+	public LinkedList<Integer> getOptionSlots()
+	{
+		return optionSlots;
+	}
+	
+	public LinkedList<String> getOptions()
+	{
+		return options;
+	}
+}

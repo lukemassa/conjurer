@@ -1,0 +1,8 @@
+// the Frame object
+public class Frame {
+	
+	private String name;
+	private LinkedList<Template> templates;
+	
+	
+}

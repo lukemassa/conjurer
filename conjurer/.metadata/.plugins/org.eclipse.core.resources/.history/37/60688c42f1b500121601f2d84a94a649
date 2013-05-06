@@ -1,0 +1,14 @@
+// the Template object
+public class Template {
+	private String[] sentence;
+	
+	public Template(String[] sentence)
+	{
+		this.sentence = sentence;
+	}
+	
+	public String[] print()
+	{
+		return sentence;
+	}
+}

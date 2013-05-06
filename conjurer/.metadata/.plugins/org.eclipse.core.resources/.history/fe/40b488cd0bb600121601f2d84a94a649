@@ -1,0 +1,79 @@
+// the Template object
+import java.util.*;
+import java.io.*;
+
+public class Template {
+	private String name;
+	private String[] corePhrase;
+	private LinkedList<Integer> optionSlots;
+	private LinkedList<String> options;
+	
+	public Template()
+	{
+		name = "";
+		corePhrase = null;
+		optionSlots = new LinkedList<Integer>();
+		options = new LinkedList<String>();
+	}
+	
+	private void hash(HashMap<String,LinkedList<Template>> map, String name, Template t)
+	{
+		
+		
+	}
+	
+	public String toString()
+	{
+		String toReturn = name + ": ";
+		for (int i = 0; i < corePhrase.length; i++)
+			toReturn += corePhrase[i] + " ";
+		
+		return toReturn;
+	}
+	
+	public LinkedList<Integer> getOptionSlots()
+	{
+		return optionSlots;
+	}
+	
+	public LinkedList<String> getOptions()
+	{
+		return options;
+	}
+	
+	public HashMap<String,LinkedList<Template>> setTemplates(String filename)
+	{
+		HashMap<String,LinkedList<Template>> map = new HashMap<String,LinkedList<Template>>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(filename));
+			String nextLine = "";
+			// iterate through all listed verbs
+			while ((nextLine = br.readLine()) != null)
+			{
+				String name = nextLine;
+				
+				// iterate through all templates for each verb
+				while (nextLine.compareTo("END") != 0)
+				{
+					Template t = new Template();
+					
+					// define the templates name and core phrase
+					t.name = name;
+					t.corePhrase = br.readLine().split(" ");
+					
+					// define the templates options
+					String[] options = br.readLine().split(" ");
+					for (int i = 0; i < options.length; i++)
+					{
+						
+						
+					}
+				}
+			}
+		} catch (Exception e){};
+		
+		
+		
+		return map;
+	}
+}
