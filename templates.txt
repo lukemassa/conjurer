@@ -1,0 +1,39 @@
+put
+conjurer put physical_object PREP location [options].
+beneficiary degree duration frequency manner purpose
+END
+hit
+conjurer hit physical_object [object]
+manner instrument body_part reason
+END
+walk
+conjurer walk PREP location [options].
+duration frequency manner 
+END
+eat
+conjurer eat food_item [options].
+manner frequency accompanying_item instrument
+END
+give
+conjurer give object to recipient [options].
+purpose frequency location circumstance
+END
+take
+conjurer take object [options].
+source destination purpose manner
+END
+pick up
+conjurer pick_up [options] liftable_object.
+quantity
+END
+ride
+conjurer ride means_of_transport [options].
+source destination duration
+END
+open
+conjurer open closeable_object [options].
+purpose instrument manner
+END
+conjurer close closeable_object [options].
+purpose instrument manner
+END
