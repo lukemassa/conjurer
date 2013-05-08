@@ -1,0 +1,26 @@
+import de.saar.coli.salsa.reiter.framenet.*;
+import java.util.*; 
+
+public class FrameNetInterface {
+
+	// method to identify inherited frames
+	public LinkedList<ExtFrame> getRootFrame(FrameNet net, String verb)
+	{
+		FrameNet net = ActionInfo.fn;
+		Collection<Frame> rootFrames = net.getRootFrames();
+		
+		for (Frame f : rootFrames)
+		{
+			StdOut.println(f);
+		}
+		return null;
+	}
+	
+	// get next-best frame
+	public Frame getFrame(FrameNet net, String verb)
+	{
+		
+		
+		return null;
+	}
+}

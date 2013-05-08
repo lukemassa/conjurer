@@ -24,9 +24,9 @@ public class TheConjurer
 	{
 		System.setProperty("wordnet.database.dir", "/home/luke/workspace/COS401-Final/WordNet-3.0/dict");
 		ThingInfo.loadNounSynsetExtensions("extensions.txt");
-		ActionInfo.loadActions("actions.txt");
-	
-
+		//ActionInfo.loadActions("actions.txt");
+		ActionInfo.loadFrameNet();
+		
 		TheConjurer game = new TheConjurer();
 		
 		String file = args[0] + ".obj";

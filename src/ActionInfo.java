@@ -1,9 +1,13 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+
+import de.saar.coli.salsa.reiter.framenet.*;
+
 
 public class ActionInfo
 {
@@ -14,7 +18,18 @@ public class ActionInfo
 			HashMap<String, HashMap<String,ArrayList<Integer>>>();
 	private static HashMap<String, HashMap<String,ArrayList<Integer>>> allPreRelations = new
 			HashMap<String, HashMap<String,ArrayList<Integer>>>();
+	public static FrameNet fn = new FrameNet();
 	
+	public static void loadFrameNet()
+	{
+	 // Load the FrameNet data
+		try {
+		File fnFile = new File("fndata-1.5");
+		DatabaseReader reader = new FNDatabaseReader15(fnFile, true);
+		fn.readData(reader);
+		} catch (Exception e) {};
+		
+	}
 	
 	public static void loadActions(String file)
 	{

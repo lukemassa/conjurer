@@ -37,7 +37,7 @@ public class Template {
 	
 	public String toString()
 	{
-		String toReturn = name + ": ";
+		String toReturn = "";
 		for (int i = 0; i < corePhrase.length; i++)
 			toReturn += corePhrase[i] + " ";
 		

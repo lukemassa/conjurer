@@ -1,0 +1,11 @@
+import de.saar.coli.salsa.reiter.framenet.*;
+
+public class FrameNetInterface {
+
+	// method to identify inherited frames
+	public String getRootFrame(FrameNet net, String verb)
+	{
+		
+		return null;
+	}
+}
